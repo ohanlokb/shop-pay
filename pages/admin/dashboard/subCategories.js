@@ -23,7 +23,7 @@ export default function subCategories({ categories, subCategories }) {
 }
 
 export async function getServerSideProps(context) {
-  db.connectDb();
+  await db.connect();
   const categories = await Category.find({}).sort({ updatedAt: -1 }).lean();
   const subCategories = await SubCategory.find({})
     .populate({ path: "parent", model: Category })

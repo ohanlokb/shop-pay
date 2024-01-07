@@ -350,10 +350,10 @@ export default function create({ parents, categories }) {
 }
 
 export async function getServerSideProps(ctx) {
-  db.connectDb();
+  await db.connect();
   const results = await Product.find().select("name subProducts").lean();
   const categories = await Category.find().lean();
-  db.disconnectDb();
+  await db.disconnect();
   return {
     props: {
       parents: JSON.parse(JSON.stringify(results)),

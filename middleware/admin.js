@@ -7,9 +7,9 @@ export default async (req, res, next) => {
     secret: process.env.JWT_SECRET,
     secureCookie: process.env.NODE_ENV === "production",
   });
-  db.connectDb();
+  db.connect();
   let user = await User.findById(token.sub);
-  db.disconnectDb();
+  db.disconnect();
   if (user.role == "admin") {
     next();
   } else {

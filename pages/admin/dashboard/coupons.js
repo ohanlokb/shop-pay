@@ -17,7 +17,7 @@ export default function coupons({ coupons }) {
 }
 
 export async function getServerSideProps(context) {
-  db.connectDb();
+  await db.connect();
   const coupons = await Coupon.find({}).sort({ updatedAt: -1 }).lean();
   return {
     props: {
